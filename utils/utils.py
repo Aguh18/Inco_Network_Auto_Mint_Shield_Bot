@@ -169,8 +169,7 @@ def approve(private_key, w3, spender_address, amount=1000000):
         wallet_address = account.address
         nonce = w3.eth.get_transaction_count(wallet_address, "pending")
         contract = w3.eth.contract(address=config.TOKENS['USDC']['address'], abi=config.ERC20_ABI)
-        amount = int(amount * 10**18)
-
+        
         # Estimasi gas dengan buffer
         gas_estimate = contract.functions.approve(
             w3.to_checksum_address(spender_address),
@@ -211,7 +210,7 @@ def wrap(private_key, w3, amount):
         
         account = w3.eth.account.from_key(private_key)
         wallet_address = account.address
-        amount = int(amount * 10**6)
+        amount = int(amount * 10**18)
         
         
         logging.log_info(f"Executing approve for amount: {amount}")
